@@ -10,9 +10,9 @@ export class InventoryPage extends BasePage {
 
   constructor(page: Page) {
     super(page);
-    this.title = page.locator('.title');
-    this.cartLink = page.locator('.shopping_cart_link');
-    this.cartBadge = page.locator('.shopping_cart_badge');
+    this.title = page.getByTestId('title');
+    this.cartLink = page.getByTestId('shopping-cart-link');
+    this.cartBadge = page.getByTestId('shopping-cart-badge');
   }
 
   async expectLoaded(): Promise<void> {
@@ -31,10 +31,6 @@ export class InventoryPage extends BasePage {
   }
 
   async expectCartCount(count: number): Promise<void> {
-    if (count === 0) {
-      await expect(this.cartBadge).toHaveCount(0);
-      return;
-    }
     await expect(this.cartBadge).toHaveText(String(count));
   }
 

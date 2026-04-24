@@ -10,9 +10,9 @@ export class CartPage extends BasePage {
 
   constructor(page: Page) {
     super(page);
-    this.title = page.locator('.title');
-    this.cartItems = page.locator('.cart_item');
-    this.checkoutButton = page.locator('[data-test="checkout"]');
+    this.title = page.getByTestId('title');
+    this.cartItems = page.getByTestId('inventory-item');
+    this.checkoutButton = page.getByRole('button', { name: 'Checkout' });
   }
 
   async expectLoaded(): Promise<void> {
@@ -27,7 +27,7 @@ export class CartPage extends BasePage {
   async expectProductVisible(productName: string): Promise<void> {
     const row: Locator = this.cartItems.filter({ hasText: productName });
     await expect(row).toHaveCount(1);
-    await expect(row.locator('.inventory_item_name')).toHaveText(productName);
+    await expect(row.getByTestId('inventory-item-name')).toHaveText(productName);
   }
 
   async expectCheckoutEnabled(): Promise<void> {

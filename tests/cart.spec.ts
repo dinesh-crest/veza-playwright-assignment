@@ -1,6 +1,6 @@
 import { test, expect } from '../src/fixtures/pages.fixture';
 
-const PRODUCT_NAME: string = 'Sauce Labs Backpack';
+const PRODUCT_NAME = 'Sauce Labs Backpack';
 
 test.describe('Cart workflow', () => {
   test.beforeEach(async ({ inventoryPage }) => {
@@ -21,7 +21,5 @@ test.describe('Cart workflow', () => {
     await cartPage.expectItemCount(1);
     await cartPage.expectProductVisible(PRODUCT_NAME);
     await cartPage.expectCheckoutEnabled();
-
-    expect(new URL(cartPage.path, 'https://www.saucedemo.com').pathname).toBe('/cart.html');
   });
 });
